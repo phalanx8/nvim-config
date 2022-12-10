@@ -1,3 +1,4 @@
+" Configurations for MacBook Pro 14/local development
 let mapleader = ","         " map leader to comma
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
