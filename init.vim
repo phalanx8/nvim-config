@@ -1,3 +1,4 @@
+" Universal Config file 
 let mapleader = ","         " map leader to comma
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
@@ -33,12 +34,6 @@ nnoremap <Leader>tn :tabnext<Enter> " disable highlighting of search
 nnoremap <Leader>tb :tabprevious<Enter> " disable highlighting of search 
 nnoremap <Leader>tc :tabclose<Enter> " disable highlighting of search 
 
-" Telescope mappings
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
 
 let g:ctrlp_custom_ignore = 'node_modules\|\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
@@ -68,6 +63,5 @@ nnoremap <Leader>t :NERDTreeToggle<CR>
 nnoremap <Leader>f :NERDTreeFind<CR>
 
 " Lua configuration and init of packer
-:lua require('plugins')
-
-
+" Uncomment when packer is configured and installed
+":lua require('plugins')
