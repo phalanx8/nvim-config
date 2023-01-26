@@ -94,7 +94,7 @@ vnoremap <leader><C-v> :call HydrovimRun('visual')<cr>
 
 " Neovim terminal configuration
 if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
+    tnoremap <leader><Esc> <C-\><C-n>
     tnoremap <C-v><Esc> <Esc>
 endif
 
