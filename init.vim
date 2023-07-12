@@ -1,4 +1,5 @@
 " Universal Config file 
+:lua require('patch')
 let mapleader = ","         " map leader to comma
 set splitright
 set nocompatible            " disable compatibility to old-time vi
@@ -34,11 +35,17 @@ nnoremap <Leader>so :source %<Enter>
 nnoremap <Leader>ns :nohlsearch<Enter> " disable highlighting of search 
 nnoremap <Leader>tw :tabnew<Enter> " disable highlighting of search 
 nnoremap <Leader>tn :tabnext<Enter> " disable highlighting of search 
-nnoremap <Leader>tb :tabprevious<Enter> " disable highlighting of search 
+nnoremap <Leader>tp :tabprevious<Enter> " disable highlighting of search 
 nnoremap <Leader>tc :tabclose<Enter> " disable highlighting of search 
 nnoremap <Leader>vs :split<bar> :wincmd p <bar> :resize 8 <bar> :terminal<Enter>
-nnoremap <Leader>o o<Esc>
-nnoremap <Leader>O O<Esc>
+nnoremap <Leader>bd :b#<Enter> " delete current buffer and replace it with previous buffer
+nnoremap <Leader>lu :m .-1<CR>==
+nnoremap <Leader>ld :m .+1<CR>==
+nnoremap <leader>sw ddkP<CR>
+nnoremap <leader>sc Lzt<CR>
+" Haskell config
+" formatting on save
+autocmd FileType haskell autocmd BufWritePre <buffer> call CocAction('format')
 
 
 " Map switching windows to <M-h> and <M-l> and <M-j> and <M-k>
@@ -47,6 +54,7 @@ nnoremap <M-l> <C-w>l
 nnoremap <M-j> <C-w>j
 nnoremap <M-k> <C-w>k
 
+let g:editorconfig = v:true
 
 let g:ctrlp_custom_ignore = 'node_modules\|\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
@@ -55,10 +63,30 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
+" set colorscheme to night owl
+"colorscheme night-owl
+"let g:night_owl_terminal_colors = 1
+"let g:night_owl_italic_comments = 1
+"let g:night_owl_italic_keywords = 1
+"let g:night_owl_italic_functions = 1
+"let g:night_owl_italic_variables = 1
+"let g:night_owl_contrast = "hard"
+"let g:night_owl_borders = 1
+"let g:night_owl_disable_background = 1
+"let g:night_owl_terminal_italics = 1
+"let g:night_owl_terminal_bold = 1
+
+
+
+
+"colorscheme night-owl
+colorscheme catppuccin-latte " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+
+":lua require('noirbuddy').setup({ preset = 'miami-nights'})
+
 call plug#begin('~/.vim/plugged')
  " Plugin Section
  Plug 'ctrlpvim/ctrlp.vim'
- Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
  Plug 'scrooloose/nerdtree'
  Plug 'hachy/eva01.vim', { 'branch': 'main' }
  Plug 'itchyny/lightline.vim'
@@ -67,29 +95,34 @@ call plug#begin('~/.vim/plugged')
  Plug 'github/copilot.vim',
  Plug 'yaegassy/coc-volar-tools', {'do': 'yarn install --frozen-lockfile'},
  Plug 'MunifTanjim/nui.nvim',
- Plug 'smzm/hydrovim',
  Plug 'ThePrimeagen/vim-be-good',
- Plug 'ryanoasis/vim-devicons'
- Plug 'ray-x/aurora'
+ Plug 'ryanoasis/vim-devicons',
+ Plug 'ray-x/aurora',
+ Plug 'goerz/jupytext.vim',
+ Plug 'mattn/emmet-vim',
+ Plug 'alvan/vim-closetag',
+ Plug 'oxfist/night-owl.nvim'
+ Plug 'chrisbra/csv.vim',
+ Plug 'catppuccin/nvim', { 'as': 'catppuccin' },
 call plug#end()
 
 
 " Configuration on plugins
-set background=dark
-colorscheme eva01
+"set background=dark
 
-
-
-
+"\ 'colorscheme': 'darcula',
 let g:lightline = {
-\ 'colorscheme': 'darcula',
+\ 'colorscheme': 'selenized_light',
+\ 'active': {
+\   'left': [ [ 'mode', 'paste' ],
+\             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ] 
+\ },
+\ 'component_function': {
+\   'cocstatus': 'coc#status',
+\   'cocprogress': 'coc#progress',
+\   'gitbranch': 'FugitiveHead',
+\ },
 \ }
-
-" Hydrovim
-nnoremap <leader><C-r> :call HydrovimRun('normal')<cr> 
-inoremap <leader><C-e> <esc> :call HydrovimRun('normal')<cr>
-vnoremap <leader><C-v> :call HydrovimRun('visual')<cr>
-
 
 
 " Neovim terminal configuration
@@ -109,16 +142,6 @@ nnoremap <Leader>nt :NERDTreeToggle<Enter>
 nnoremap <Leader>nf :NERDTreeFind<Enter>
 nnoremap <Leader>bs gg 2j<Enter>
 
-" Lua configuration and init of packer
-" Uncomment when packer is configured and installed
-:lua require('plugins')
-
-" Coc Configuration 
-:lua require('coc-config')
-
-" Treesitter configuration
-:lua require('treesitter')
-
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -131,6 +154,28 @@ nnoremap <leader>ft <cmd>Telescope<cr>
 " Listchars configuration
 set listchars=eol:↓,space:·,trail:●,tab:→⇥⇥,extends:>,precedes:<
 
+" Sourcing configurations of plugins in vimscript
+source ~/.config/nvim/vim/jupytext.vim
+
+
+" Lua configuration and init of packer
+" Uncomment when packer is configured and installed
+:lua require('plugins')
+
+" Coc Configuration 
+:lua require('coc-config')
+
+" Treesitter configuration
+:lua require('treesitter')
+
+" Telescope helper
+ :lua require('helpers/helpers')
 
 " Telescope configuration
-:lua require('telescopeconfig')
+ :lua require('telescopeconfig')
+
+" Iron configuration
+:lua require('ironconfig')
+
+" Gitsigns configuration
+:lua require('gitsignsconfig')

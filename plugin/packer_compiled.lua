@@ -74,6 +74,26 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["colorbuddy.nvim"] = {
+    loaded = true,
+    path = "/Users/mojemai/.local/share/nvim/site/pack/packer/start/colorbuddy.nvim",
+    url = "https://github.com/tjdevries/colorbuddy.nvim"
+  },
+  ["gitsigns.nvim"] = {
+    loaded = true,
+    path = "/Users/mojemai/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
+  ["iron.nvim"] = {
+    loaded = true,
+    path = "/Users/mojemai/.local/share/nvim/site/pack/packer/start/iron.nvim",
+    url = "https://github.com/hkupty/iron.nvim"
+  },
+  ["nvim-noirbuddy"] = {
+    loaded = true,
+    path = "/Users/mojemai/.local/share/nvim/site/pack/packer/start/nvim-noirbuddy",
+    url = "https://github.com/jesseleite/nvim-noirbuddy"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/mojemai/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
@@ -100,6 +120,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mojemai/.local/share/nvim/site/pack/packer/start/telescope-coc.nvim",
     url = "https://github.com/fannheyward/telescope-coc.nvim"
+  },
+  ["telescope-file-browser.nvim"] = {
+    loaded = true,
+    path = "/Users/mojemai/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
+    url = "https://github.com/nvim-telescope/telescope-file-browser.nvim"
+  },
+  ["telescope-fzf-native.nvim"] = {
+    loaded = true,
+    path = "/Users/mojemai/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
